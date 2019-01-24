@@ -8,26 +8,27 @@ class BeerContainer extends Component {
     searchBar: "",
     beer: ""
   };
-  //  => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     searchBar: e.target.value
-  //   });
-  // };
-  handleClick = myBeer => {
-    console.log(myBeer.image_url);
+
+  searchHandler = inputValue => {
+    console.log(inputValue);
     this.setState({
-      beer: myBeer
+      searchBar: inputValue
     });
+    this.returnByFilter(inputValue);
   };
-  searchHandler = value => {
-    let newArr = [...this.state.filteredArray];
-    const another = newArr.filter(beer =>
-      beer.name.toLowerCase().includes(value.toLowerCase())
-    );
-    this.setState({
-      filteredArray: another
-    });
+
+  returnByFilter = inputValue => {
+    if (inputValue !== "") {
+      let newArr = [...this.state.beers];
+      const tmp = newArr.filter(beer =>
+        // beer.name.toLowerCase().includes(this.state.searchBar.toLowerCase())
+        beer.name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      this.setState({
+        filteredArray: tmp
+      });
+      console.log(newArr);
+    }
   };
 
   componentDidMount() {
@@ -41,9 +42,16 @@ class BeerContainer extends Component {
       );
   }
 
+  clickHandler = myBeer => {
+    // console.log(myBeer.name);
+    this.setState({
+      beer: myBeer
+    });
+  };
+
   renderEachBeer = () => {
     return this.state.filteredArray.map(beer => (
-      <li onClick={() => this.handleClick(beer)} key={beer.name} beer={beer}>
+      <li onClick={() => this.clickHandler(beer)} beer={beer} key={beer.name}>
         {beer.name}
       </li>
     ));
@@ -51,7 +59,10 @@ class BeerContainer extends Component {
   render() {
     return (
       <div>
-        <Search searchHandler={this.searchHandler} />
+        <Search
+          // searchBar={this.state.searchBar}
+          searchHandler={this.searchHandler}
+        />
         <br />
         <ul className="container">{this.renderEachBeer()}</ul>
         <BeerDetail beer={this.state.beer} />
