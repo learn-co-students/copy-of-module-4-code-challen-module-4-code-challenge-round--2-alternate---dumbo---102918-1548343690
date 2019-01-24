@@ -45,7 +45,7 @@ class BeerContainer extends Component {
   }
 
   render() {
-    console.log(this.state.beerDetails);
+    // console.log(this.state.beerDetails);
     return (
       <div>
         <Search query={this.state.searchQuery} onChange={this.searchHandler}/>
