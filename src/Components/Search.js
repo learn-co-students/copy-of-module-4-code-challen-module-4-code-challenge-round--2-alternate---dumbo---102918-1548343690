@@ -1,7 +1,10 @@
 import React from "react";
 
-const Search = () => {
-  return <form className="search">{/*Build Form Here*/}</form>;
+const Search = (props) => {
+  return <form className="search">
+    <input type="text" onChange={(event)=> props.onChange(event)}/>
+  </form>;
+
 };
 
 export default Search;
