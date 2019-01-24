@@ -1,4 +1,5 @@
 import React from "react";
+import './BeerItem.css'
 
 const BeerItem = (props) => {
   return (

@@ -8,7 +8,7 @@ class BeerList extends Component {
       return <BeerItem  beer={beer} key={beer.id} handleBeer={this.props.handleBeer}/>
     })
     return (
-      <div className="list">
+      <div>
 
       {beers}
       </div>
